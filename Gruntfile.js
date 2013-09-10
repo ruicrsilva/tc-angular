@@ -296,7 +296,10 @@ module.exports = function( grunt ) {
           'package.json',
           'bower.json'
         ],
-        updateConfigs: []
+        updateConfigs: [],
+        commit: false,
+        createTag: false,
+        push: false
       }
     }
 
