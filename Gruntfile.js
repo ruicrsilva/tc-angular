@@ -31,6 +31,14 @@ module.exports = function( grunt ) {
     'clean:tmp'
   ] );
 
+  grunt.registerTask( 'server:src', [
+    'connect:src:keepalive'
+  ] );
+
+  grunt.registerTask( 'server:build', [
+    'connect:build:keepalive'
+  ] );
+
 
   var LIVERELOAD_PORT = 35729;
   var mountFolder = function ( connect, dir ) {
