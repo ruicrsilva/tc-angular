@@ -2,5 +2,5 @@
 node_modules/
 bower_components/
 build/
-tmp/
+tc-build-tmp/
 !.gitkeep
