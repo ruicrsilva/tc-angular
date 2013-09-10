@@ -32,13 +32,27 @@ module.exports = function( grunt ) {
   ] );
 
 
-
-
   var LIVERELOAD_PORT = 35729;
   var mountFolder = function ( connect, dir ) {
     return connect.static( require( 'path' ).resolve( dir ) );
   };
   var modRewrite = require( 'connect-modrewrite' );
+  var modRewriteFiletypes = [
+    '.html',
+    '.js',
+    '.css',
+    '.swf',
+    '.jp(e?)g',
+    '.png',
+    '.gif',
+    '.xml',
+    '.json',
+    '.svg',
+    '.eot',
+    '.ttf',
+    '.woff'
+  ];
+  var modRewriteRegExp = '!\\' + modRewriteFiletypes.join('|\\');
   var userConfig = require( './build.config.js' );
   var pkg = grunt.file.readJSON('package.json');
 
@@ -65,7 +79,7 @@ module.exports = function( grunt ) {
           middleware: function ( connect ) {
             return [
               modRewrite( [
-                '!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif$ /index.html'
+                modRewriteRegExp + '$ /index.html'
               ] ),
               mountFolder( connect, 'src' )
             ];
@@ -80,7 +94,7 @@ module.exports = function( grunt ) {
           middleware: function ( connect ) {
             return [
               modRewrite( [
-                '!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif$ /index.html'
+                modRewriteRegExp + '$ /index.html'
               ] ),
               mountFolder( connect, 'build' )
             ];
